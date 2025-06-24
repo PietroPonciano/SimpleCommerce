@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil</title>
+</head>
+<body>
+{% include 'includes/header.html' %}
+
+    <div class="container mt-4">
+        <h1>{{ usuario.username }}</h1>
+        <p>Email: {{ usuario.email }}</p>
+        <p>Telefone: {{ usuario.perfil.telefone }}</p>
+    </div>
+{% endblock %}
+
+</body>
+</html>

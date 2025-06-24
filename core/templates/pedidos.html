@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedidos</title>
+</head>
+<body>
+
+{% block content %}
+{% include 'includes/header.html' %}
+
+<h2>📋 Todos os Pedidos Criados</h2>
+
+{% if pedidos %}
+  <ul class="list-group">
+    {% for pedido in pedidos %}
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Pedido #{{ pedido.id }}</h5>
+          <p class="card-text">
+            Usuário: {{ pedido.usuario.username }}<br>
+            Telefone: {{ pedido.telefone }}<br>
+            E-mail: {{ pedido.email }}<br>
+            Total: R$ {{ pedido.total }}<br>
+            Data: {{ pedido.criado|date:"d/m/Y" }}
+          </p>
+
+          <h6>Itens do pedido:</h6>
+          <ul>
+            {% for item in pedido.itens.all %}
+              <li>{{ item.produto.nome }} — Quantidade: {{ item.quantidade }}</li>
+            {% empty %}
+              <li>Sem itens neste pedido.</li>
+            {% endfor %}
+          </ul>
+          <form method="post" action="{% url 'atualizar_status' pedido.id %}" style="display:inline;">
+    {% csrf_token %}
+    <label for="status-{{ pedido.id }}">Status:</label>
+    <select name="status" id="status-{{ pedido.id }}">
+        <option value="pendente" {% if pedido.status == 'pendente' %}selected{% endif %}>Pendente</option>
+        <option value="processando" {% if pedido.status == 'processando' %}selected{% endif %}>Processando</option>
+        <option value="enviado" {% if pedido.status == 'enviado' %}selected{% endif %}>Enviado</option>
+        <option value="entregue" {% if pedido.status == 'entregue' %}selected{% endif %}>Entregue</option>
+        <option value="cancelado" {% if pedido.status == 'cancelado' %}selected{% endif %}>Cancelado</option>
+    </select>
+    <button type="submit" class="btn btn-primary btn-sm">💾 Atualizar</button>
+</form>
+
+
+          <form method="post" action="{% url 'deletar_pedido' pedido.id %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">🗑 Apagar</button>
+          </form>
+        </div>
+      </div>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>Nenhum pedido foi criado ainda.</p>
+{% endif %}
+
+<a href="{% url 'index' %}" class="btn btn-secondary mt-3">Voltar</a>
+
+{% endblock %}
+
+
+</body>
+</html>

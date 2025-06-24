@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Atendimento IA</title>
+    {% bootstrap_css %}
+</head>
+<body>
+{% block content %}
+{% include 'includes/header.html' %}
+
+<div class="container mt-4">
+    <h2>Tire suas duvidas com o SimpleBot</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" name="pergunta" class="form-control" placeholder="Digite sua pergunta" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+
+    {% if resposta %}
+        <div class="alert alert-info mt-3">
+            <strong>Resposta do SimpleBot:</strong> {{ resposta }}
+        </div>
+    {% endif %}
+</div>
+
+{% bootstrap_javascript jquery='full' %}
+{% endblock %}
+</body>
+</html>

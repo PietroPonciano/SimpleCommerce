@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    {% load static%}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+{% include 'includes/header.html' %}
+
+    <form method="post">
+        <h2>Entrar</h2>
+
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p>Não tem conta? <a href="{% url 'registro' %}">Faça login</a></p>
+        <button type="submit">Entrar</button>
+
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8fafd;
+  color: #1c1c1c;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* TÍTULO */
+h1 {
+  color: #0d6efd;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* CARTÃO DE PRODUTO */
+.card {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.05);
+  background-color: #ffffff;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 123, 255, 0.15);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* BOTÃO PRIMÁRIO */
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: #fff;
+  transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #084298;
+  border-color: #084298;
+}
+
+/* MODAL */
+.modal-content {
+  border-radius: 10px;
+}
+
+.modal-header {
+  background-color: #0d6efd;
+  color: white;
+  border-bottom: none;
+}
+
+.modal-body {
+  background-color: #ffffff;
+  color: #212529;
+}
+
+/* RESPONSIVO */
+@media (max-width: 992px) {
+  .col-md-4 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .card-img-top {
+    height: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .col-md-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .card-img-top {
+    height: 160px;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .card-body p {
+    font-size: 0.95rem;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 15px;
+  }
+
+  .card-img-top {
+    height: 140px;
+  }
+
+  .modal-body p {
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Acesso negado</title>
+</head>
+<body>
+  <h1>Você não tem permissão para acessar a página de pedidos.</h1>
+  <p>Redirecionando em <span id="contador">3</span> segundos...</p>
+
+  <script>
+    let tempo = 6;
+    const contadorElem = document.getElementById('contador');
+
+    const intervalo = setInterval(() => {
+      tempo--;
+      contadorElem.textContent = tempo;
+      if (tempo === 0) {
+        clearInterval(intervalo);
+        window.location.href = '/';  // redireciona para a home (ou qualquer URL que quiser)
+      }
+    }, 1000);
+  </script>
+</body>
+</html>

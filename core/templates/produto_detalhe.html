@@ -1,0 +1,33 @@
+{% load static bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ produto.nome }}</title>
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+{% include 'includes/header.html' %}
+<div class="container mt-4">
+    <h1>{{ produto.nome }}</h1>
+    <img src="{{ produto.imagem.url }}" class="img-fluid mb-3" style="max-width: 400px;">
+    <p><strong>Preço:</strong> R$ {{ produto.preco }}</p>
+    <p><strong>Estoque:</strong> {{ produto.estoque }}</p>
+    <p><strong>Descrição:</strong> {{ produto.descricao }}</p>
+
+    <a href="{% url 'index' %}" class="btn btn-secondary mt-3">Voltar</a>
+    {% if user.is_authenticated %}
+    <form method="post" action="{% url 'adicionar_ao_carrinho' produto.id %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary btn-sm">Adicionar ao carrinho</button>
+</form>
+
+    {% else %}
+    <a href="{% url 'login' %}" class="btn btn-outline-secondary btn-sm"> Faça login para adicionar ao carrinho </a>
+    {% endif %}
+</div>
+{% bootstrap_javascript jquery='full' %}
+</body>
+</html>

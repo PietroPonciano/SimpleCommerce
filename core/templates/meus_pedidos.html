@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static bootstrap4 %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meus pedidos</title>
+</head>
+<body>
+
+    {% include 'includes/header.html' %}
+
+    <h2>Meus Pedidos</h2>
+
+    {% if pedidos %}
+        <ul>
+            {% for pedido in pedidos %}
+                <li>
+                    <strong>Pedido #{{ pedido.id }}</strong> - {{ pedido.criado|date:"d/m/Y" }}<br>
+                    Total: R$ {{ pedido.total }}<br>
+                    <strong>Status:</strong>
+                    {% if pedido.status == 'cancelado' %}
+                    <span style="color: red;">{{ pedido.get_status_display }}</span>
+                    {% elif pedido.status == 'processando' %}
+                    <span style="color: #b86e14;">{{ pedido.get_status_display }}</span>
+                    {% elif pedido.status == 'entregue' %}
+                    <span style="color: green;">{{ pedido.get_status_display }}</span>
+                    {% elif pedido.status == 'enviado' %}
+                    <span style="color: blue;">{{ pedido.get_status_display }}</span>
+                    {%else%}
+                    {{ pedido.get_status_display }}
+                    {% endif %}
+                    <ul>
+                        {% for item in pedido.itens.all %}
+                            <li>{{ item.quantidade }}x {{ item.produto.nome }} - R$ {{ item.preco_unitario }}</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Você ainda não realizou nenhum pedido.</p>
+    {% endif %}
+{% endblock %}
+
+</body>
+</html>

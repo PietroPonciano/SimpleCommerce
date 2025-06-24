@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Produto</title>
+    {% bootstrap_css %}
+</head>
+<body>
+{% block content %}
+{% include 'includes/header.html' %}
+    <div class="container">
+        <h1>Produto</h1>
+        {% bootstrap_messages %}
+
+        <form action="{% url 'produto' %}" method="post" class="form" autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+        {% endbuttons %}
+    </div>
+{% bootstrap_javascript jquery='full' %}
+{% endblock %}
+</body>
+</html>
